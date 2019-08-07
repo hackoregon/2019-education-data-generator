@@ -1,5 +1,8 @@
-from factory.generator.student import Student
-from factory.generator.strategy import Strategy
+#from generator.student import Student
+#from generator.strategy import Strategy
+from generator.student import Student
+from generator.strategy import Strategy
+
 
 class Factory:
     """This class produces fake data using the student class contained
@@ -23,10 +26,7 @@ class Factory:
         self.count = count
         self.demographic_distribution = demographic_distribution
         """Use the demographic_distribution to create the students"""
-        "def student: __init__(self, id_num, year_k, gender, race, ell, poverty, disabled, strategy):"
         self.student_population = []
         for i in range(count):
             self.student_population.append(Student(i, 2 ,"m", 3, True, False, False, Strategy()))
-        """for kid in student_population:
-            print(kid.id_num)"""
         
