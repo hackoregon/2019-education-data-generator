@@ -1,8 +1,16 @@
-#from generator.student import Student
-#from generator.strategy import Strategy
 from generator.student import Student
 from generator.strategy import Strategy
+import random
 
+#sample distribution
+test_distribution = {
+    "year_k": 0,
+    "gender": 0,
+    "race": 0,
+    "ell": 0,
+    "poverty": 0,
+    "disabled": 0,
+}
 
 class Factory:
     """This class produces fake data using the student class contained
@@ -25,8 +33,16 @@ class Factory:
         """
         self.count = count
         self.demographic_distribution = demographic_distribution
-        """Use the demographic_distribution to create the students"""
+        #TODO: Use the demographic_distribution to create the students
         self.student_population = []
+        years = list(range(2000, 2015))
+        genders = ["m", "f"]
+        races = [1,2,3,4,5]
         for i in range(count):
-            self.student_population.append(Student(i, 2 ,"m", 3, True, False, False, Strategy()))
-        
+            year = random.choice(years)
+            self.student_population.append(Student(i, random.choice(years) ,random.choice(genders), random.choice(races), False, False, False, Strategy()))
+            
+
+    def pretty_print(self):
+        for person in self.student_population:
+            print(person.year_k)
