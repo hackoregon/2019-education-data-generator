@@ -1,5 +1,5 @@
-from generator.student import Student
-from generator.strategy import Strategy
+from .student import Student
+from .strategy import Strategy
 import random
 
 #sample distribution
@@ -19,7 +19,7 @@ class Factory:
     be used for applying demographics characteristics of the students across
     the generated population. TODO: determine the type of the output to be generated."""
 
-    def __init__(self, count, demographic_distribution):
+    def __init__(self, count, demographic_distribution, strategy):
         """
         Student Params
         :param id_num: The ID number of the student (proxy for SSN, int)
@@ -33,14 +33,15 @@ class Factory:
         """
         self.count = count
         self.demographic_distribution = demographic_distribution
+        self.strategy = strategy
         #TODO: Use the demographic_distribution to create the students
         self.student_population = []
         years = list(range(2000, 2015))
         genders = ["m", "f"]
         races = [1,2,3,4,5]
         for i in range(count):
-            year = random.choice(years)
-            self.student_population.append(Student(i, random.choice(years) ,random.choice(genders), random.choice(races), False, False, False, Strategy()))
+            self.student_population.append(Student(i, random.choice(years),random.choice(genders), random.choice(races), False, False, False, self.strategy))
+
             
 
     def pretty_print(self):
