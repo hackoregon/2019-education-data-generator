@@ -138,3 +138,28 @@ SRC_INDICES = {
     "math": [1, 2, 3],
     "science": [1, 2, 3]
 }
+
+# example student demographic
+# structuring the demographics this way COULD allow us to generate a set of students that more closely reflect
+# the demographics of Oregon students, IF IF IF we know what those distributions are.
+# If we DON'T have good sources on these numbers, we should not make them up;
+# instead we should give up on the idea of generating fake data that reflects an assumed reality.
+# TODO: As much as possible, GET these demographics!
+# TODO: If they don't exist, remove those demographics from under the 'race' object
+DEMO = {
+    'gender': 0.51,
+    'disabled': 0.05,
+    'race': {
+        'distribution': [0.5, 0.2, 0.15, 0.1, 0.05], # pct white, black, hispanic, asian, native american
+        'ell': [0.02, 0.05, 0.12, 0.10, 0], # pct of each race that qualify as English Language Learners
+        'poverty': [0.3, 0.4, 0.4, 0.25, 0.45] # pct of each race that qualify for free/reduced student lunches
+    }
+}
+# Each of these demographics represents a choice from a uniform distribution between 0 and 1 (not inclusive).
+# import numpy as np
+# np.random.uniform()
+# gives you a random number in [0,1); if that number is below 0.51 (for example), the student is female.
+# The race['distribution'] gives you a partition of Oregon by race (there may be a different set of known ethnicities).
+# In the above data, if your next number is < 0.5, the student is white; if it is 0.5 <= x < 0.7, they are black, etc.
+# Once that choice is made, we can use the ethnicity 'code' as an index in ell and poverty to get a 'correct'
+# demographic breakdown for the race of that student, and make two more random number selections to decide on them.
