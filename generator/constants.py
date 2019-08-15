@@ -139,22 +139,24 @@ SRC_INDICES = {
     "science": [1, 2, 3]
 }
 
-# example student demographic
-# structuring the demographics this way COULD allow us to generate a set of students that more closely reflect
-# the demographics of Oregon students, IF IF IF we know what those distributions are.
-# If we DON'T have good sources on these numbers, we should not make them up;
-# instead we should give up on the idea of generating fake data that reflects an assumed reality.
 # TODO: As much as possible, GET these demographics!
 # TODO: If they don't exist, remove those demographics from under the 'race' object
-DEMO = {
-    'gender': 0.51,
-    'disabled': 0.05,
-    'race': {
-        'distribution': [0.5, 0.2, 0.15, 0.1, 0.05], # pct white, black, hispanic, asian, native american
-        'ell': [0.02, 0.05, 0.12, 0.10, 0], # pct of each race that qualify as English Language Learners
-        'poverty': [0.3, 0.4, 0.4, 0.25, 0.45] # pct of each race that qualify for free/reduced student lunches
-    }
-}
+DEMO = {'gender': 0.505, 'race': {'distribution': [0.624, 0.023, 0.23, 0.04, 0.007, 0.013, 0.061],
+                                  'disability': [0.14, 0.16, 0.13, 0.07, 0.11, 0.18, 0.14],
+                                  'ell': [0.02, 0.05, 0.12, 0.10, 0],
+                                  'poverty': [0.124, 0.258, 0.194, 0.14, 0.176, 0.218, 0.132]}}
+# sources:
+# gender: OR 2010 Census: http://censusviewer.com/state/OR
+# race: OR Annual Report Card p.11: https://www.oregon.gov/ode/schools-and-districts/reportcards/Documents/rptcard2018.pdf
+# races by index: white, black, hispanic, asian, pacific islander, native american, multi-racial
+# ell (English language learner): https://nces.ed.gov/programs/coe/indicator_cgf.asp
+# disability: https://nces.ed.gov/programs/coe/indicator_cgf.asp
+#       See Indicators > Preprimary, Elementary, and Secondary Enrollment >
+#                        Elementary and Secondary Enrollment > Children and Youth With Disabilities
+# poverty: https://talkpoverty.org/state-year-report/oregon-2018-report/
+#       That doesn't have pacific islander or multi-racial numbers;
+#       https://sites.ed.gov/aapi/data-and-statistics/ gave a reasonable (if slightly old) pacific islander rate
+#       For multi-racial poverty right now we have the national numbers in use.
 # Each of these demographics represents a choice from a uniform distribution between 0 and 1 (not inclusive).
 # import numpy as np
 # np.random.uniform()
