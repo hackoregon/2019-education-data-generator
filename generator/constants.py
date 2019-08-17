@@ -138,3 +138,39 @@ SRC_INDICES = {
     "math": [1, 2, 3],
     "science": [1, 2, 3]
 }
+
+# demographics of Oregon estimated from below sources
+DEMO = {'gender': 0.505, 'race': {'distribution': [0.624, 0.023, 0.23, 0.04, 0.007, 0.013, 0.061],
+                                  'disability': [0.14, 0.16, 0.13, 0.07, 0.11, 0.18, 0.14],
+                                  'ell': [0.010, 0.031, 0.288, 0.208, 0.098, 0.098, 0.020],
+                                  'poverty': [0.124, 0.258, 0.194, 0.14, 0.176, 0.218, 0.132]}}
+# sources:
+##########
+# gender: OR 2010 Census: http://censusviewer.com/state/OR
+# race: OR 2018 Report Card p.11: https://www.oregon.gov/ode/schools-and-districts/reportcards/Documents/rptcard2018.pdf
+# races by index: white, black, hispanic, asian, pacific islander, native american, multi-racial
+# ell (English language learner): https://nces.ed.gov/programs/coe/indicator_cgf.asp
+#       this one is difficult: English Language Learners are often broken down by 'home language', not race.  We took
+#       the national race breakdowns at the above link, divided them by 10 to give a percentage of the population as a
+#       whose (the page claims that approximately 10% of public school students are ELLs), then compared that to
+#       American race demographics to approximate the percentage of the population of a race that would be ELLs.
+#       As Pacific Islanders, Native Americans, and Multi-racial students are each described as "having fewer than
+#       40,000 students identifying as ELLs" (< 1% of the ELL population), and as the first two populations are
+#       themselves a small portion of the population, we assigned them the national average of 9.8%.  As Multi-racial
+#       people make up a more significant portion of the population, yet still comprise less than 1% of ELLs, we
+#       estimate that 2% are ELLs.
+#       This assumes that national trends are reflected in Oregon trends, which may not be a valid assumption;
+#       Unfortunately, any solution other than getting the actual data involves significant assumptions.
+# disability: https://nces.ed.gov/programs/coe/indicator_cgg.asp
+# poverty: https://talkpoverty.org/state-year-report/oregon-2018-report/
+#       That doesn't have pacific islander or multi-racial numbers;
+#       https://sites.ed.gov/aapi/data-and-statistics/ gave a reasonable (if slightly old) pacific islander rate
+#       For multi-racial poverty right now we have the national numbers in use.
+# Each of these demographics represents a choice from a uniform distribution between 0 and 1 (not inclusive).
+# import numpy as np
+# np.random.uniform()
+# gives you a random number in [0,1); if that number is below 0.505 (for example), the student is female.
+# The race['distribution'] gives you a partition of Oregon by race (there may be a different set of known ethnicities).
+# Once that choice is made, we can use the ethnicity 'code' as an index in ell and poverty to get a 'correct'
+# demographic breakdown for the race of that student, and make additional random number selections to decide on them;
+# it is hoped that this gives is some approximation of intersectionality.

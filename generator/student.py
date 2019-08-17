@@ -36,3 +36,28 @@ class Student:
         :return: A dictionary of RIT scores for the appropriate number of years/subjects
         """
         return {}
+
+    def print(self):
+        sid = self.id_num
+        gen = self.gender
+        yr = self.year_k
+        if self.race == 0:
+            race = 'white'
+        elif self.race == 1:
+            race = 'black'
+        elif self.race == 2:
+            race = 'hisp'
+        elif self.race == 3:
+            race = 'asian'
+        elif self.race == 4:
+            race = 'pacis'
+        elif self.race == 5:
+            race = 'natam'
+        elif self.race == 6:
+            race = 'multi'
+        else:
+            race = 'buggy'
+        ell = str(self.ell)[0]
+        pov = str(self.poverty)[0]
+        dis = str(self.disabled)[0]
+        print(f"Student #{sid} ({gen}, {race}): Started {yr}, ell = {ell}, pov = {pov}, dis = {dis}")
