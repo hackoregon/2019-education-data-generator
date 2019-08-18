@@ -47,6 +47,10 @@ would allow us to generate several data sets based on differing assumptions, at 
 point we could allow a user to play with the potential effects.  We could also then
 compare such effects to real data when it is obtained, or write tests that target these
 effects which could then be run on the real data to attempt to measure them.
+1. We need a better way to select an 11th grade RIT score for all but Science;
+without growth parameters, selecting a final score from yearly distributions rather than
+using the growth distributions is jarring and strange.  Perhaps growth parameters
+could be estimated by running some sort of regression from K-10?
 
 In addition, there are several reasonable and interesting stretch goals.
 1. RIT scales have additive subcategories known as Score Reporting Categories (SRCs).
