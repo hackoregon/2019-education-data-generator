@@ -128,6 +128,11 @@ YEAR_GROWTH_NORMS = [
         "reading": {"mu": 0.7, "sigma": 9.66, "diff": 0.5},
         "math": {"mu": 2.3, "sigma": 8.92, "diff": -3.3},
         "english": {"mu": 1.2, "sigma": 8.61, "diff": -1.5}
+    },
+    {  # we made this up.  Deal with it.  Sunglasses.
+        "reading": {"mu": 0.4, "sigma": 9.66, "diff": 0.3},
+        "math": {"mu": 1.8, "sigma": 8.92, "diff": -2.3},
+        "english": {"mu": 0.9, "sigma": 8.61, "diff": -1.8}
     }
 ]
 
