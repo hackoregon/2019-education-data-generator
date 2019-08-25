@@ -1,5 +1,6 @@
 from .student import Student
 import numpy as np
+import csv
 
 
 class Factory:
@@ -50,11 +51,29 @@ class Factory:
                 strategy=self.strategy
             ))
 
+
     def pretty_print(self, head=None):
         if head is None:
             head = len(self.student_population)
         for person in self.student_population[:head]:
             person.pretty_print()
+
+
+    def print_to_file(self, csv_file_name="csv_output.csv"):
+        headers = ["Student_id", "race", "year_started", "ell", "pov", "dis"]
+        for year in range(12):
+            y = str(year)
+            #'GRADE', 'ENGLISH', 'MATH', 'READING', 'SCIENCE')
+            headers += ["english_" + y, "math_" + y, "reading_" + y, "science_" + y] 
+
+        with open(csv_file_name, 'w+') as csv_file:
+            csv_filewriter = csv.writer(csv_file, delimiter=',',
+                            quotechar='|', quoting=csv.QUOTE_MINIMAL)
+            #PRINT HEADERS
+            csv_filewriter.writerow(headers)
+            for person in self.student_population:
+                person.print_to_file(csv_filewriter)
+
 
     def print_demos(self):
         men = 0

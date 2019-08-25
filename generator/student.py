@@ -47,7 +47,7 @@ class Grade:
             else:
                 grade_str += '{:>12.2f}'.format(self.get_score(sub))
         print(grade_str)
-
+    
 
 class Student:
     """
@@ -115,6 +115,17 @@ class Student:
         sid = self.id_num
         gen = self.gender
         yr = self.year_k
+        race = self._describe_race()
+        ell = str(self.ell)[0]
+        pov = str(self.poverty)[0]
+        dis = str(self.disabled)[0]
+        print(f"Student #{sid} ({gen}, {race}): Started {yr}, ell = {ell}, pov = {pov}, dis = {dis}")
+        print("\tGrades:")
+        print('\t{:>8s}{:>12s}{:>12s}{:>12s}{:>12s}'.format('GRADE', 'ENGLISH', 'MATH', 'READING', 'SCIENCE'))
+        for grade in self.rit:
+            grade.pretty_print()
+        
+    def _describe_race(self):
         if self.race == 0:
             race = 'white'
         elif self.race == 1:
@@ -131,11 +142,20 @@ class Student:
             race = 'multi'
         else:
             race = 'buggy'
-        ell = str(self.ell)[0]
-        pov = str(self.poverty)[0]
-        dis = str(self.disabled)[0]
-        print(f"Student #{sid} ({gen}, {race}): Started {yr}, ell = {ell}, pov = {pov}, dis = {dis}")
-        print("\tGrades:")
-        print('\t{:>8s}{:>12s}{:>12s}{:>12s}{:>12s}'.format('GRADE', 'ENGLISH', 'MATH', 'READING', 'SCIENCE'))
+        return race
+
+    def print_to_file(self, filewriter):
+        row = [self.id_num, self.gender, self.year_k, self._describe_race(), self.ell, self.poverty, self.disabled]
+        #fill null values for grades until first grade with data
+        n = 0
+        while n < self.rit[0].grade:
+            row += ['','','','']
+            n += 1
         for grade in self.rit:
-            grade.pretty_print()
+            row += [grade.english, grade.math, grade.reading, grade.science]
+        #fill null values for grades after last great upto 11.
+        n = self.rit[-1].grade
+        while n < 11:
+           row += ['','','',''] 
+           n += 1
+        filewriter.writerow(row)
