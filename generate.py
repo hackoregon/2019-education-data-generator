@@ -6,19 +6,19 @@ from generator.constants import DEMO
 import numpy as np
 
 # Choices
-#n = 100000  # Number of students desired
-n = 3  # Number of students desired
+n = 100000  # Number of students desired
+#n = 3  # Number of students desired
 
 strat = NoDemoStrategy()
 stud_fact = Factory(n, DEMO, strat)
-#stud_fact.print_demos()
+stud_fact.print_demos()
 
 # inspect a few students
-#does = np.random.choice(stud_fact.student_population, 10, replace=False)
+does = np.random.choice(stud_fact.student_population, 10, replace=False)
 
 #print("\nA Student Sample")
-#for doe in does:
-#    doe.pretty_print()
+for doe in does:
+    doe.pretty_print()
 
 #print to csv file
 stud_fact.print_to_file()
