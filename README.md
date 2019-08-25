@@ -34,25 +34,14 @@ to what we have counted in the real world Oregon cohorts.
 
 ## To Do
 There are still several critical tasks that remain.
-1. The Student factors (bonuses) are not yet a part of score generation.
-1. These factors should probably be reconsidered, as they are likely increasing score
-variation in their current formulation.
 1. We need to be able to output the Students to a format that could be ingested by a database
 (or even to a database itself).  We have a schema to emulate for the students themselves,
 but not yet for RIT scores (cf. `Data Elements\Data Model_3.docx` in the `team-education`
 shared drive).
-1. We need a Strategy that allows us to make various suppositions about the effects
-of demographics on RIT scores (i.e. poverty, English learner, and disabilities).  This
-would allow us to generate several data sets based on differing assumptions, at which
-point we could allow a user to play with the potential effects.  We could also then
-compare such effects to real data when it is obtained, or write tests that target these
-effects which could then be run on the real data to attempt to measure them.
-1. We need a better way to select an 11th grade RIT score for all but Science;
-without growth parameters, selecting a final score from yearly distributions rather than
-using the growth distributions is jarring and strange.  Perhaps growth parameters
-could be estimated by running some sort of regression from K-10?
 
 In addition, there are several reasonable and interesting stretch goals.
+1. These factors should probably be reconsidered, as they are likely increasing score
+variation in their current formulation.
 1. RIT scales have additive subcategories known as Score Reporting Categories (SRCs).
 We know what those are for each of the four scales (in our shared team drive, see
 `Data Elements\Assessment Score Reporting Category Descriptions by Subject`).  We could

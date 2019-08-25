@@ -100,15 +100,14 @@ class Student:
                 if sub in YEAR_START_NORMS[i].keys():
                     # if the subject was measured last grade, estimate change and add
                     # also, 11th grade has no growth norms, so default to start for now
-                    # TODO: come up with a better plan than this.
-                    if len(scores) > 0 and i < 11 and scores[-1].get_score(sub) is not None:
+                    if len(scores) > 0 and scores[-1].get_score(sub) is not None:
                         params = YEAR_GROWTH_NORMS[i][sub]
                         delta = np.random.normal(params['mu'], params['sigma']) + params['diff']
-                        grade.set_score(sub, scores[-1].get_score(sub) + delta)
+                        grade.set_score(sub, scores[-1].get_score(sub) + self.factors[sub] * delta)
                     # otherwise, estimate a new starting grade
                     else:
                         params = YEAR_START_NORMS[i][sub]
-                        grade.set_score(sub, np.random.normal(params['mu'], params['sigma']))
+                        grade.set_score(sub, np.random.normal(params['mu'], params['sigma']) * self.factors[sub])
             scores.append(grade)
         return scores
 
