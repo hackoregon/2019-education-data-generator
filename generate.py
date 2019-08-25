@@ -7,7 +7,7 @@ import numpy as np
 
 # Choices
 #n = 100000  # Number of students desired
-n = 1  # Number of students desired
+n = 3  # Number of students desired
 
 strat = NoDemoStrategy()
 stud_fact = Factory(n, DEMO, strat)

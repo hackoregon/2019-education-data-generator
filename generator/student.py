@@ -47,7 +47,7 @@ class Grade:
             else:
                 grade_str += '{:>12.2f}'.format(self.get_score(sub))
         print(grade_str)
-
+    
 
 class Student:
     """
@@ -146,5 +146,17 @@ class Student:
         return race
 
     def print_to_file(self, filewriter):
-        demo = [self.id_num, self.gender, self.year_k, self._describe_race(), self.ell, self.poverty, self.disabled] 
-        filewriter.writerow(demo + self.rit)
+        row = [self.id_num, self.gender, self.year_k, self._describe_race(), self.ell, self.poverty, self.disabled]
+        #fill null values for grades until first grade with data
+        n = 0
+        while n < self.rit[0].grade:
+            row += ['','','','']
+            n += 1
+        for grade in self.rit:
+            row += [grade.english, grade.math, grade.reading, grade.science]
+        #fill null values for grades after last great upto 11.
+        n = self.rit[-1].grade
+        while n < 11:
+           row += ['','','',''] 
+           n += 1
+        filewriter.writerow(row)
