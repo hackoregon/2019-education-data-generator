@@ -16,7 +16,7 @@ stud_fact.print_demos()
 # inspect a few students
 does = np.random.choice(stud_fact.student_population, 10, replace=False)
 
-#print("\nA Student Sample")
+print("\nA Student Sample")
 for doe in does:
     doe.pretty_print()
 
