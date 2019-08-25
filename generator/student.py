@@ -116,6 +116,17 @@ class Student:
         sid = self.id_num
         gen = self.gender
         yr = self.year_k
+        race = self._describe_race()
+        ell = str(self.ell)[0]
+        pov = str(self.poverty)[0]
+        dis = str(self.disabled)[0]
+        print(f"Student #{sid} ({gen}, {race}): Started {yr}, ell = {ell}, pov = {pov}, dis = {dis}")
+        print("\tGrades:")
+        print('\t{:>8s}{:>12s}{:>12s}{:>12s}{:>12s}'.format('GRADE', 'ENGLISH', 'MATH', 'READING', 'SCIENCE'))
+        for grade in self.rit:
+            grade.pretty_print()
+        
+    def _describe_race(self):
         if self.race == 0:
             race = 'white'
         elif self.race == 1:
@@ -132,11 +143,8 @@ class Student:
             race = 'multi'
         else:
             race = 'buggy'
-        ell = str(self.ell)[0]
-        pov = str(self.poverty)[0]
-        dis = str(self.disabled)[0]
-        print(f"Student #{sid} ({gen}, {race}): Started {yr}, ell = {ell}, pov = {pov}, dis = {dis}")
-        print("\tGrades:")
-        print('\t{:>8s}{:>12s}{:>12s}{:>12s}{:>12s}'.format('GRADE', 'ENGLISH', 'MATH', 'READING', 'SCIENCE'))
-        for grade in self.rit:
-            grade.pretty_print()
+        return race
+
+    def print_to_file(self, filewriter):
+        demo = [self.id_num, self.gender, self.year_k, self._describe_race(), self.ell, self.poverty, self.disabled] 
+        filewriter.writerow(demo + self.rit)
