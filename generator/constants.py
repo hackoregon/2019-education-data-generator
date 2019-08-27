@@ -179,3 +179,7 @@ DEMO = {'gender': 0.505, 'race': {'distribution': [0.624, 0.023, 0.23, 0.04, 0.0
 # Once that choice is made, we can use the ethnicity 'code' as an index in ell and poverty to get a 'correct'
 # demographic breakdown for the race of that student, and make additional random number selections to decide on them;
 # it is hoped that this gives is some approximation of intersectionality.
+
+DIS_PCT = sum([x[0]*x[1] for x in zip(DEMO['race']['distribution'], DEMO['race']['disability'])])
+ELL_PCT = sum([x[0]*x[1] for x in zip(DEMO['race']['distribution'], DEMO['race']['ell'])])
+POV_PCT = sum([x[0]*x[1] for x in zip(DEMO['race']['distribution'], DEMO['race']['poverty'])])
