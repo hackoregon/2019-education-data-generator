@@ -1,3 +1,5 @@
+import math
+
 from .constants import YEAR_START_NORMS, YEAR_GROWTH_NORMS
 import numpy as np
 
@@ -80,7 +82,7 @@ class Student:
         self.ell = ell
         self.poverty = poverty
         self.disabled = disabled
-        self.factors = strategy.get_proficiency_factors(student=self)
+        self.bonuses = strategy.get_proficiency_bonuses(student=self)
         self.rit = self.generate_scores()
 
     def generate_scores(self):
@@ -102,12 +104,16 @@ class Student:
                     # also, 11th grade has no growth norms, so default to start for now
                     if len(scores) > 0 and scores[-1].get_score(sub) is not None:
                         params = YEAR_GROWTH_NORMS[i][sub]
-                        delta = np.random.normal(params['mu'], params['sigma']) + params['diff']
-                        grade.set_score(sub, scores[-1].get_score(sub) + self.factors[sub] * delta)
+                        mu = params['mu'] + self.bonuses[sub]/3
+                        sigma = math.sqrt(params['sigma']**2 - 100/9)
+                        delta = np.random.normal(mu, sigma) + params['diff']
+                        grade.set_score(sub, scores[-1].get_score(sub) + delta)
                     # otherwise, estimate a new starting grade
                     else:
                         params = YEAR_START_NORMS[i][sub]
-                        grade.set_score(sub, np.random.normal(params['mu'], params['sigma']) * self.factors[sub])
+                        mu = params['mu'] + self.bonuses[sub]
+                        sigma = math.sqrt(params['sigma']**2 - 100)
+                        grade.set_score(sub, np.random.normal(mu, sigma))
             scores.append(grade)
         return scores
 
@@ -135,6 +141,11 @@ class Student:
         pov = str(self.poverty)[0]
         dis = str(self.disabled)[0]
         print(f"Student #{sid} ({gen}, {race}): Started {yr}, ell = {ell}, pov = {pov}, dis = {dis}")
+        print("\tBonuses:")
+        print('\t{:>8s}{:>12s}{:>12s}{:>12s}{:>12s}'.format('', 'ENGLISH', 'MATH', 'READING', 'SCIENCE'))
+        print('\t{:>8s}{:>12.2f}{:>12.2f}{:>12.2f}{:>12.2f}'.format(
+            '', self.bonuses['english'], self.bonuses['math'], self.bonuses['reading'], self.bonuses['science']
+        ))
         print("\tGrades:")
         print('\t{:>8s}{:>12s}{:>12s}{:>12s}{:>12s}'.format('GRADE', 'ENGLISH', 'MATH', 'READING', 'SCIENCE'))
         for grade in self.rit:
